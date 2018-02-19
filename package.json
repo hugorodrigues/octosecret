@@ -1,0 +1,26 @@
+{
+  "name": "octosecret",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "standard | snazzy",
+    "lint:fix": "standard --fix",
+    "test": "npm run lint"
+  },
+  "repository": "hugorodrigues/octosecret",
+  "author": "Hugo Rodrigues",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hugorodrigues/octosecret/issues"
+  },
+  "homepage": "https://github.com/hugorodrigues/octosecret#readme",
+  "dependencies": {
+    "got": "^8.2.0",
+    "inquirer": "^5.1.0"
+  },
+  "devDependencies": {
+    "snazzy": "^7.0.0",
+    "standard": "^11.0.0"
+  }
+}

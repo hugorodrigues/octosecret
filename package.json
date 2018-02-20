@@ -2,25 +2,42 @@
   "name": "octosecret",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "lint": "standard | snazzy",
-    "lint:fix": "standard --fix",
-    "test": "npm run lint"
+  "main": "src/octosecret.js",
+  "bin": {
+    "octosecret": "src/octosecret.js"
   },
   "repository": "hugorodrigues/octosecret",
-  "author": "Hugo Rodrigues",
+  "author": {
+    "name": "Hugo Rodrigues",
+    "email": "me@hugorodrigues.com",
+    "url": "https://www.hugorodrigues.com"
+  },
+  "scripts": {
+    "lint": "standard | snazzy",
+    "lint:fix": "standard --fix | snazzy",
+    "test": "npm run lint ; jest",
+    "release": "np"
+  },
+  "engines": {
+    "node": "~9.5.0"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hugorodrigues/octosecret/issues"
   },
   "homepage": "https://github.com/hugorodrigues/octosecret#readme",
   "dependencies": {
+    "chalk": "^2.3.1",
+    "commander": "^2.14.1",
+    "get-stdin": "^5.0.1",
     "got": "^8.2.0",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "meow": "^4.0.0"
   },
   "devDependencies": {
+    "jest": "^22.3.0",
     "snazzy": "^7.0.0",
+    "np": "^2.20.1",
     "standard": "^11.0.0"
   }
 }

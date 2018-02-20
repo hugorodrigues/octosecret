@@ -2,9 +2,9 @@
   "name": "octosecret",
   "version": "0.0.1",
   "description": "",
-  "main": "src/octosecret.js",
+  "main": "src/index.js",
   "bin": {
-    "octosecret": "src/octosecret.js"
+    "octosecret": "src/index.js"
   },
   "repository": "hugorodrigues/octosecret",
   "author": {

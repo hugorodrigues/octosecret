@@ -6,6 +6,11 @@ const got = require('got')
  * @class Github
  */
 class Github {
+  constructor () {
+    // Add internal cache
+    this.cache = {}
+  }
+
   /**
    * Validates a github username
    * @param {String} username Github username
@@ -24,6 +29,11 @@ class Github {
    * @memberof Github
    */
   async getUserKey (username) {
+    // If in cache return immediately
+    if (this.cache[username]) {
+      return this.cache[username]
+    }
+
     // Validate username format
     if (!this.validUser(username)) {
       throw new Error('Invalid username format')
@@ -44,7 +54,8 @@ class Github {
       const key = keys[0]
 
       // trim the "ssh-rsa " from the key
-      return key.substr(8)
+      this.cache[username] = key
+      return this.cache[username]
     } catch (error) {
       throw new Error('Cant fetch key from github.com')
     }

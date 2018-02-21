@@ -23,15 +23,25 @@ class CLI {
     console.log(`${chalk.green('?')} ${chalk.bold('Enter the text/data you want to encrypt:')} ${chalk.grey('(Press CTRL+C when you are done)')}\n`)
     return new Promise((resolve, reject) => {
       const lines = []
+
+      // Start a new prompt
       const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
       })
 
+      // Every time there is a newline save it for later
       rl.on('line', input => {
         lines.push(input)
       })
 
+      // On CTRL+C we receive this event and we going to add a nl in case the user haven't
+      rl.on('SIGINT', () => {
+        rl.write('\n')
+        rl.close()
+      })
+
+      // On close, process and resolve the promise
       rl.on('close', input => {
         let finalInput = lines.join('\n')
         resolve(finalInput)

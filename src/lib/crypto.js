@@ -20,6 +20,7 @@ class Crypto {
     // Ask for the github username if none provided
     if (!input.username) {
       input.username = await cli.promptUsername()
+      input.username = input.username.username
     }
 
     // Ask for data if no file or stdin provided

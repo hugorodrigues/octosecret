@@ -20,7 +20,7 @@ class CLI {
    * @memberof CLI
    */
   promptData () {
-    console.log(`${chalk.green('?')} ${chalk.bold('Enter the text/data you want to encrypt:')} (Press CTRL+C when you are done)]\n`)
+    console.log(`${chalk.green('?')} ${chalk.bold('Enter the text/data you want to encrypt:')} ${chalk.grey('(Press CTRL+C when you are done)')}\n`)
     return new Promise((resolve, reject) => {
       const lines = []
       const rl = readline.createInterface({

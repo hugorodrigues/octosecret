@@ -5,29 +5,29 @@ Simple and secure encryption between github users
 A convenient way to encrypt files (or text) that only a specific github user can read. After encryption, **you send** the data to the user for decryption.
 
 ## How it works?
-**Everything happens locally and no data is transmited.** Data will be encrypted using the **public key** of the github user you specify. Decryption will use your **local private key**. Check [octosecret-crypto](https://github.com/hugorodrigues/octosecret) for more implementation details.
+**Everything happens locally and no data is transmitted.** Data will be encrypted using the **public key** of the github user you specify. Decryption will use your **local private key**. Check [octosecret-crypto](https://github.com/hugorodrigues/octosecret) for more implementation details.
 
 ## Install
 ```
 $ npm install -g octosecret
 ```
 
-## Encrypting file
-Encrypt *"/some/sensitive.file"* using *github.com/hugorodrigues* public key
+## Files
+Encrypt *"/some/sensitive.file"* using *github.com/hugorodrigues* public key:
 ```
 $ octosecret encrypt hugorodrigues /some/sensitive.file
 
 Success! You file has been saved to /some/sensitive.file.hugorodrigues.octosecret
 ```
 
-To decrypt
+To decrypt:
 ```
 $ octosecret decrypt sensitive.file.hugorodrigues.octosecret
 
 Success! You file has been saved to sensitive.file
 ```
 
-## Encrypting text
+## Text
 For convenience, you can also encrypt text. The following command will allow you to type (or paste) the text you want to encrypt. The output will be the final encrypted data you should send to the other user:
 ```
 $ octosecret encrypt hugorodrigues
@@ -40,7 +40,7 @@ $ octosecret decrypt
 
 
 ## API
-This project is a CLI, if you need to make something programatically please check [octosecret-crypto](https://github.com/hugorodrigues/octosecret).
+This project is a CLI, if you need to make something programmatically please check [octosecret-crypto](https://github.com/hugorodrigues/octosecret).
 ```
 
   Usage:

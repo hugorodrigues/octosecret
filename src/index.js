@@ -2,7 +2,7 @@
 const meow = require('meow')
 const getStdin = require('get-stdin')
 const chalk = require('chalk')
-const CLI = require('./lib/cli')
+const Crypto = require('./lib/crypto')
 
 const cmd = meow(`
 ${chalk.bold('Usage:')}
@@ -34,32 +34,37 @@ ${chalk.bold('Examples:')}
   $ octosecret decrypt /some/file.octosecret
 `)
 
+// Basic CLI routing
 const boot = async function () {
   // Get main command
   const command = cmd.input[0]
   // Get input from stdin
   const stdin = await getStdin()
-
-  switch (command) {
-    case 'encrypt':
-      // Start encryption cli
-      CLI.encrypt({
-        stdin,
-        username: cmd.input[1],
-        file: cmd.input[2]
-      })
-      break
-    case 'decrypt':
-      // Start decryption cli
-      CLI.decrypt({
-        stdin,
-        file: cmd.input[2]
-      })
-      break
-    default:
-      // Show help
-      cmd.showHelp()
-      process.exit(1)
+  try {
+    switch (command) {
+      case 'encrypt':
+        // Start encryption cli
+        await Crypto.encrypt({
+          stdin,
+          username: cmd.input[1],
+          file: cmd.input[2]
+        })
+        break
+      case 'decrypt':
+        // Start decryption cli
+        await Crypto.decrypt({
+          stdin,
+          file: cmd.input[1]
+        })
+        break
+      default:
+        // Show help
+        cmd.showHelp()
+        process.exit(1)
+    }
+  } catch (e) {
+    console.error(e.message)
+    process.exit(1)
   }
 }
 

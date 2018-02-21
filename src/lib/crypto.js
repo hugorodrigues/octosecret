@@ -25,7 +25,7 @@ class Crypto {
 
     // Ask for data if no file or stdin provided
     if (!input.stdin && !input.file) {
-      input.stdin = await cli.promptData()
+      input.stdin = await cli.promptData('Enter or paste the text you want to encrypt:')
     }
 
     try {
@@ -68,7 +68,7 @@ class Crypto {
   async decrypt (input) {
     // Ask for data if no file or stdin provided
     if (!input.stdin && !input.file) {
-      input.stdin = await cli.promptData()
+      input.stdin = await cli.promptData('Enter or paste the data you want to decrypt:')
       // Give and empty line after prompt
       console.log('')
     }

@@ -23,8 +23,8 @@ class CLI {
    * @returns
    * @memberof CLI
    */
-  promptData () {
-    console.log(`${chalk.green('?')} ${chalk.bold('Enter the text/data you want to encrypt:')} ${chalk.grey('(Press CTRL+C when you are done)')}\n`)
+  promptData (label) {
+    console.log(`${chalk.green('?')} ${chalk.bold(label)} ${chalk.grey('(Press CTRL+C when you are done)')}\n`)
     return new Promise((resolve, reject) => {
       const lines = []
 

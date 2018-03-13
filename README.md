@@ -22,9 +22,9 @@ Success! You file has been saved to /some/sensitive.file.hugorodrigues.octosecre
 
 To decrypt:
 ```
-$ octosecret decrypt sensitive.file.hugorodrigues.octosecret
+$ octosecret decrypt /some/sensitive.file.hugorodrigues.octosecret
 
-Success! You file has been saved to sensitive.file
+Success! You file has been saved to /some/sensitive.file
 ```
 
 ## Text

@@ -27,8 +27,10 @@
   },
   "homepage": "https://github.com/hugorodrigues/octosecret#readme",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chalk": "^2.3.1",
-    "commander": "^2.14.1",
     "get-stdin": "^5.0.1",
     "got": "^8.2.0",
     "inquirer": "^5.1.0",
@@ -37,9 +39,10 @@
     "word-wrap": "^1.2.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "jest": "^22.3.0",
-    "snazzy": "^7.0.0",
     "np": "^2.20.1",
+    "snazzy": "^7.0.0",
     "standard": "^11.0.0"
   }
 }

@@ -1,4 +1,5 @@
 const got = require('got')
+const fs = require('fs-extra')
 
 /**
  * Github utilities
@@ -48,17 +49,31 @@ class Github {
         throw new Error('This user dont have a key on github.com')
       }
 
-      // User may have multiple keys
-      const keys = response.body.split('\n')
-      // Get first one
-      const key = keys[0]
+      // Add keys to the cache
+      this.cache[username] = response.body.trim().split('\n')
 
-      // trim the "ssh-rsa " from the key
-      this.cache[username] = key
       return this.cache[username]
     } catch (error) {
       throw new Error('Cant fetch key from github.com')
     }
+  }
+
+  /**
+   * Save keys to disk
+   * @param {Array} keys
+   * @param {String} path
+   */
+  async saveUserKeys (keys, path) {
+    const keyPaths = []
+
+    // Save every key to disk
+    for (const i in keys) {
+      const keyPath = `${path}/public_key_${i}`
+      await fs.outputFile(keyPath, keys[i])
+      keyPaths.push(keyPath)
+    }
+
+    return keyPaths
   }
 }
 

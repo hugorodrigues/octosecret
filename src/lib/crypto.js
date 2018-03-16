@@ -1,6 +1,5 @@
 const wrap = require('word-wrap')
 const tmp = require('tmp')
-const fs = require('fs-extra')
 const octosecret = require('octosecret-crypto')
 
 const Github = require('./github')
@@ -28,12 +27,14 @@ class Crypto {
       input.stdin = await cli.promptData('Enter or paste the text you want to encrypt:')
     }
 
+    // Create temp folder to save public keys
+    const tempFolder = tmp.dirSync({ unsafeCleanup: true })
+
     try {
-      // Get user public key
-      input.userKey = await Github.getUserKey(input.username)
-      // Save key to a temp file
-      input.userKeyPath = tmp.fileSync().name
-      await fs.outputFile(input.userKeyPath, input.userKey)
+      // Get user public keys
+      const userKeys = await Github.getUserKey(input.username)
+      // Save keys to a temp folder
+      input.userKeyPaths = await Github.saveUserKeys(userKeys, tempFolder.name)
     } catch (e) {
       throw new Error(`Error fetching github key for user "${input.username}"`)
     }
@@ -43,12 +44,12 @@ class Crypto {
         // Final destination of encrypted file
         const destination = `${input.file}.${input.username}.octosecret`
         // Encrypt file
-        await octosecret.file.encrypt(input.file, destination, input.userKeyPath)
+        await octosecret.file.encrypt(input.file, destination, input.userKeyPaths)
         // Output
         console.log(`Success! You file has been saved to ${destination}`)
       } else {
         // Encrypt buffer
-        const output = await octosecret.buffer.encrypt(input.stdin, input.userKeyPath)
+        const output = await octosecret.stream.encrypt(input.stdin, input.userKeyPaths)
         // Pack output using the template
         const outputPacked = this.payloadPack(input.username, output)
         // Clear console
@@ -84,7 +85,7 @@ class Crypto {
         // Unpack the input (Remove comments, nl, etc)
         const payload = this.payloadUnPack(input.stdin)
         // Decrypt
-        const output = await octosecret.buffer.decrypt(payload)
+        const output = await octosecret.stream.decrypt(payload)
         // Clear console
         cli.promptClean()
         console.log(`---- BEGIN DECRYPTED MESSAGE ----\n${output}\n---- END DECRYPTED MESSAGE ----`)

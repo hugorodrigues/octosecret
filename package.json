@@ -35,7 +35,7 @@
     "got": "^8.2.0",
     "inquirer": "^5.1.0",
     "meow": "^4.0.0",
-    "octosecret-crypto": "latest",
+    "octosecret-crypto": "^0.3.0",
     "word-wrap": "^1.2.3"
   },
   "devDependencies": {
